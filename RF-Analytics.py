@@ -1,12 +1,12 @@
 #Paper presented at NSS17
-
+#Mohammed Al-janabi
 # import the necessary packages
 from random import randint
-from sklearn import  decomposition, ensemble,preprocessing
+from sklearn import  decomposition, ensemble, preprocessing
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.random_projection import SparseRandomProjection,GaussianRandomProjection
+from sklearn.random_projection import SparseRandomProjection, GaussianRandomProjection
 from sklearn.cross_validation import train_test_split
-from sklearn import metrics,tree
+from sklearn import metrics, tree
 from sklearn import linear_model
 import numpy as np
 import pandas as pd
