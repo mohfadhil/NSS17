@@ -1,3 +1,5 @@
+#Paper presented at NSS17
+
 # import the necessary packages
 from random import randint
 from sklearn import  decomposition, ensemble,preprocessing
@@ -28,7 +30,7 @@ rfrecall ={}
 rff1 ={}
 rfprec ={}
 rfauc ={}
-DataSet = pd.read_csv("Datasets/dataset8sepedited.csv", sep=",") 
+DataSet = pd.read_csv("Datasets/dataset8sepedited.csv", sep=",")
 DataSet['agedbytwts']=DataSet['user.statuses_count']/DataSet['AccountAge']
 DataSet['wbexl']=DataSetä['NoofExLinks']*DataSet['NoofWords']
 npArray = np.array(DataSet)
@@ -57,8 +59,8 @@ for minsiplit in minsamplesplit:
         resultsrf=pd.DataFrame()
         resultspca=pd.DataFrame()
         rr = pd.DataFrame()
-    
-        
+
+
         for x in projs:
             rfaccuracies[str(x)]={}
             rfrecall[str(x)]={}
@@ -73,30 +75,30 @@ for minsiplit in minsamplesplit:
                 rff1[str(x)][str(t)]=metrics.f1_score( testTarget,randomforests.predict(testData))
                 rfprec[str(x)][str(t)]=metrics.precision_score( testTarget,randomforests.predict(testData))
                 rfauc[str(x)][str(t)]=metrics.roc_auc_score( testTarget,randomforests.predict(testData))
-        
-        
+
+
         writer = pd.ExcelWriter('results/ms'+str(minsiplit)+'exp'+str(exi)+'rf.xlsx')
         rfacc=pd.DataFrame.from_dict(rfaccuracies, orient='columns', dtype=None)
         rfrec=pd.DataFrame.from_dict(rfrecall, orient='columns', dtype=None)
         rff1m=pd.DataFrame.from_dict(rff1, orient='columns', dtype=None)
         rfprec=pd.DataFrame.from_dict(rfprec, orient='columns', dtype=None)
         rfroc=pd.DataFrame.from_dict(rfauc, orient='columns', dtype=None)
-        
+
         rfacc = rfacc[changeorder(rfacc.columns.tolist())]
         rfacc=rfacc.reindex(changeorderindex(rfacc.index.tolist()))
-        
+
         rfrec = rfrec[changeorder(rfrec.columns.tolist())]
         rfrec=rfrec.reindex(changeorderindex(rfrec.index.tolist()))
-        
+
         rff1m = rff1m[changeorder(rff1m.columns.tolist())]
         rff1m=rff1m.reindex(changeorderindex(rff1m.index.tolist()))
-        
+
         rfprec = rfprec[changeorder(rfprec.columns.tolist())]
         rfprec=rfprec.reindex(changeorderindex(rfprec.index.tolist()))
-        
+
         rfroc = rfroc[changeorder(rfroc.columns.tolist())]
         rfroc=rfroc.reindex(changeorderindex(rfroc.index.tolist()))
-        
+
         rfacc.to_excel(writer,sheet_name='rfaccuracies')
         rfrec.to_excel(writer,sheet_name='rfrecall')
         rff1m.to_excel(writer,sheet_name='rff1')
